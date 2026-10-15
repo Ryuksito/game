@@ -19,8 +19,9 @@ Gestiona el ciclo de vida de la plataforma EOS, la autenticación y las operacio
 | `login_anonymous(display_name: String)` | `void` | Inicia el flujo de autenticación anónima mediante `Device ID`. Si el usuario no existe en EOS Connect, se crea automáticamente. |
 | `get_local_product_user_id()` | `String` | Retorna el `ProductUserId` (PUID) local en formato texto hexadecimal, o cadena vacía si no está autenticado. |
 | `create_lobby(max_players: int, bucket_id: String, is_public: bool)` | `void` | Crea un lobby en EOS limitando los cupos entre 1 y 5 jugadores (`std::clamp`). Publica automáticamente el atributo público `"BUCKET"` para indexación en búsquedas. |
-| `search_lobbies(bucket_id: String)` | `void` | Busca hasta 25 lobbies públicos activos que coincidan exactamente con el `bucket_id`. Cachea los `EOS_HLobbyDetails` para permitir unirse de inmediato. |
-| `join_lobby(lobby_id: String)` | `void` | Se une al lobby indicado consumiendo el detalle previamente cacheado por `search_lobbies`. |
+| `search_lobbies(bucket_id: String)` | `void` | Busca hasta 25 lobbies públicos activos que coincidan exactamente con el `bucket_id` (o si se pasa un ID de lobby de 32 caracteres, filtra directamente por Lobby ID). Cachea los `EOS_HLobbyDetails` para permitir unirse de inmediato. |
+| `join_lobby(lobby_id: String)` | `void` | Se une al lobby indicado consumiendo el detalle previamente cacheado por `search_lobbies`. Si no se encuentra en caché local, realiza automáticamente un fallback a `join_lobby_by_id`. |
+| `join_lobby_by_id(lobby_id: String)` | `void` | Se une directamente a un lobby usando su `lobby_id` único sin requerir búsqueda previa en caché (soporta `bEnableJoinById = EOS_TRUE`). |
 | `leave_lobby(lobby_id: String)` | `void` | Abandona el lobby activo y limpia la referencia interna. |
 | `get_lobby_members(lobby_id: String)` | `Array[String]` | Retorna un arreglo con los `ProductUserId` en texto de todos los miembros actualmente conectados al lobby. |
 | `get_lobby_owner_puid(lobby_id: String)` | `String` | Retorna el `ProductUserId` del anfitrión (host / owner) del lobby. |

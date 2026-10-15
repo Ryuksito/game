@@ -114,6 +114,7 @@ func _on_join_pressed() -> void:
 
 func _on_lobbies_found(lobbies: Array) -> void:
 	if lobbies.is_empty():
+		print("RESULTADO DE EPIC: Se encontraron ", lobbies.size(), " lobbies activos en total con este Bucket.")
 		print("No existe ningún lobby con el código: ", codigo_sala_actual)
 		btn_create.disabled = false
 		btn_join.disabled = false
