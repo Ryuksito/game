@@ -1,0 +1,20 @@
+[configuration]
+
+entry_symbol = "eos_godot_library_init"
+compatibility_minimum = "4.7"
+
+[libraries]
+
+windows.debug.x86_64 = "res://addons/eos-godot/bin/libeos_godot.windows.template_debug.x86_64.dll"
+windows.release.x86_64 = "res://addons/eos-godot/bin/libeos_godot.windows.template_release.x86_64.dll"
+
+[dependencies]
+
+windows.debug.x86_64 = {
+    "res://addons/eos-godot/bin/EOSSDK-Win64-Shipping.dll": "",
+    "res://addons/eos-godot/bin/xaudio2_9redist.dll": ""
+}
+windows.release.x86_64 = {
+    "res://addons/eos-godot/bin/EOSSDK-Win64-Shipping.dll": "",
+    "res://addons/eos-godot/bin/xaudio2_9redist.dll": ""
+}
